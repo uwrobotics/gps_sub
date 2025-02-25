@@ -1,0 +1,20 @@
+package ins;
+
+struct ins_t {
+    double      time;
+    uint16_t    week;
+    uint64_t    utcTime; 
+    uint16_t    insStatus;
+    float       yaw;
+    float       pitch;
+    float       roll;
+    double      latitude;
+    double      longitude;
+    double      altitude;
+    float       nedVelX;
+    float       nedVelY;
+    float       nedVelZ;
+    float       attUncertainty[3];
+    float       posUncertainty;
+    float       velUncertainty;
+}
