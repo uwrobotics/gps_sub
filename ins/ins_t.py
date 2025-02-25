@@ -11,7 +11,7 @@ class ins_t(object):
 
     __slots__ = ["time", "week", "utcTime", "insStatus", "yaw", "pitch", "roll", "latitude", "longitude", "altitude", "nedVelX", "nedVelY", "nedVelZ", "attUncertainty", "posUncertainty", "velUncertainty"]
 
-    __typenames__ = ["double", "int16_t", "int64_t", "int16_t", "float", "float", "float", "double", "double", "double", "float", "float", "float", "float", "float", "float"]
+    __typenames__ = ["double", "int32_t", "int64_t", "int32_t", "float", "float", "float", "double", "double", "double", "float", "float", "float", "float", "float", "float"]
 
     __dimensions__ = [None, None, None, None, None, None, None, None, None, None, None, None, None, [3], None, None]
 
@@ -104,7 +104,7 @@ class ins_t(object):
         return buf.getvalue()
 
     def _encode_one(self, buf):
-        buf.write(struct.pack(">dhqhfffdddfff", self.time, self.week, self.utcTime, self.insStatus, self.yaw, self.pitch, self.roll, self.latitude, self.longitude, self.altitude, self.nedVelX, self.nedVelY, self.nedVelZ))
+        buf.write(struct.pack(">diqifffdddfff", self.time, self.week, self.utcTime, self.insStatus, self.yaw, self.pitch, self.roll, self.latitude, self.longitude, self.altitude, self.nedVelX, self.nedVelY, self.nedVelZ))
         buf.write(struct.pack('>3f', *self.attUncertainty[:3]))
         buf.write(struct.pack(">ff", self.posUncertainty, self.velUncertainty))
 
@@ -143,4 +143,4 @@ class ins_t(object):
     def get_hash(self):
         """Get the LCM hash of the struct"""
         return struct.unpack(">Q", ins_t._get_packed_fingerprint())[0]
-
+        
